@@ -12,7 +12,7 @@ const btn = document.querySelector('.btn');
 console.log("CONTENT NOT YET LOADED!", fullname); //what will fullname evaluate to?
 
 const capitalize = function(word) {
-  return word[0].toUpperCase() + word.slice(1)).join(" ");
+  return word[0].toUpperCase() + word.slice(1);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -21,13 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch('https://randomuser.me/api/')
     .then(resp => resp.json())
     .then(json => {
-      // debugger
       const data = json.results[0];
-      fullname.innerText = capitalize([data.name.first, data.name.last].map(word => capitalize(word)).join(' '));
+      fullname.innerText = capitalize(data.name.first) +' '+ capitalize(data.name.last);
       email.innerText = data.email;
-      street.innerText = data.location.street;
+      street.innerText = data.location.street.split(' ')[0] + ' ' + capitalize(data.location.street.split(' ')[1]);
       city.innerText = capitalize(data.location.city);
-      state.innerText = data.location.state;
+      state.innerText = capitalize(data.location.state);
       postcode.innerText = data.location.postcode;
       phone.innerText = data.phone;
       cell.innerText = data.cell;
